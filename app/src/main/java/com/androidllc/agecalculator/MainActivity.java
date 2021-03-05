@@ -82,8 +82,29 @@ public class MainActivity extends AppCompatActivity {
             rMonth.setText(String.valueOf(resultMonth));
             rYear.setText(String.valueOf(resultYear));
 
+
+            Log.d("HOURS: ",String.valueOf(getHour()));
+
         }else{
             Toast.makeText(this, "Choose Birth Day first.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private long getHour() {
+        String dobDateIntoString = dobDate+"-"+dobMonth+"-"+dobYear;
+        String currentDateIntoString = cDate+"-"+cMonth+"-"+cYear;
+        try {
+            Date d1 = sdf.parse(dobDateIntoString);
+            Date d2 = sdf.parse(currentDateIntoString);
+            long difference_In_Time
+                    = d2.getTime() - d1.getTime();
+            long difference_In_Hours
+                    = (difference_In_Time
+                    / (1000 * 60 * 60));
+            return difference_In_Hours;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
         }
     }
 
